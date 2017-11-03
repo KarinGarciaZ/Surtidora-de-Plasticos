@@ -1,0 +1,28 @@
+.button-navbar{
+    border: none;
+}
+
+#search-bar{
+    width: 77%;
+}
+
+#search-button{
+    width: 20%;
+}
+
+#user-button{
+    float: right;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+img{
+    height: 55px;
+    cursor: pointer;
+}
+
+#navbarCollapse{
+    padding-left: 70px;
+}
