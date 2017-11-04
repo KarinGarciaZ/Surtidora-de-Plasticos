@@ -26,3 +26,7 @@ img{
 #navbarCollapse{
     padding-left: 70px;
 }
+
+.dropdown-menu{
+    left: auto;
+}

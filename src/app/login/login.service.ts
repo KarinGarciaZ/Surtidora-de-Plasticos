@@ -1,0 +1,62 @@
+import { Injectable, OnInit } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+
+
+@Injectable()
+export class LoginService {
+  username: string = 'Entrar';
+
+  constructor( private afAuth: AngularFireAuth ) { 
+    afAuth.authState.subscribe( resp => {
+      if (resp)
+        if (resp.displayName)
+          this.username = resp.displayName;
+        else
+          this.username = resp.email;
+      else
+        this.username = 'Entrar';
+    });
+  }  
+
+  checkUser(){
+    this.afAuth.authState.subscribe( resp => {
+      if (resp.displayName)
+        this.username = resp.displayName;
+      else
+        this.username = resp.email;
+    });
+  }   
+  
+
+  login(kind, mail?, pass?){
+    if ( kind === 'Google') this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    
+    if ( kind === 'Mail') 
+      this.afAuth.auth.signInWithEmailAndPassword(mail, pass).then(resolved => { 
+        this.checkUser();
+      }).catch(function (e : Error) {
+        if ( e.message === 'There is no user record corresponding to this identifier. The user may have been deleted.')
+          alert("Ususrio no existe.")
+        else
+          alert(e.message);
+      });    
+  }
+
+  createUserMail(kind, mail?, pass?){
+    if ( kind === 'Mail') 
+      this.afAuth.auth.createUserWithEmailAndPassword(mail, pass).then(resolved => { 
+        this.checkUser();
+      }).catch(function (e : Error) {
+        if ( e.message === 'The email address is already in use by another account.')
+          alert("Ususrio ya existe.")
+        else
+          alert(e.message);
+      });
+  }
+
+  logout(){
+    this.afAuth.auth.signOut();
+    this.username = 'Entrar';
+  }
+}
