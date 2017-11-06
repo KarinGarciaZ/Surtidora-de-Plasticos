@@ -1,3 +1,34 @@
-<p>
-  login works!
-</p>
+<div class="container">  
+    <div class="container">
+        <form [formGroup] = "form" (ngSubmit) = "login()">
+            <div *ngIf = "form.errors" class="alert alert-danger">error in the login</div>
+            
+              <label for="mail">Email</label>
+              <input 
+                  formControlName="mail"
+                  id="mail" 
+                  type="text" 
+                  class="form-control">                       
+          
+              <label for="password">Contraseña</label>
+              <input 
+                  formControlName = "password"
+                  id="password" 
+                  type="text" 
+                  class="form-control">  
+                  
+              <label for="password2">Confirmar Contraseña</label>
+              <input 
+                  formControlName = "password2"
+                  id="password2" 
+                  type="text" 
+                  class="form-control"> 
+
+              <div *ngIf = "mail.touched && mail.invalid" class="alert alert-danger">
+                  <div *ngIf = "password.value != password2.value">Contraseñas no son iguales</div>                        
+              </div> 
+                        
+            <button class="btn btn-primary" type="submit">Registrarse</button>
+        </form>        
+    </div>
+</div> <!-- /container -->

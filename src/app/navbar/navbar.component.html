@@ -45,13 +45,36 @@
             <div class="btn-group">
               <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/categories">{{ log.username }}</a>
               <a ngbDropdownToggle class="btn btn-outline-secondary nav-link dropdown-toggle button-navbar"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  
               </a>
+
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username === 'Entrar')">
-                <a class="dropdown-item" routerLink="" (click)="log.login('Google')" >Entrar con Google</a>
-                <a class="dropdown-item" routerLink="/admin/orders" (click)="log.login('Mail', 'oscarin962011@hotmail.com', 'hola123')">Ya Tengo Cuenta</a>
-                <a class="dropdown-item" routerLink="/admin/products" (click)="log.createUserMail('Mail', 'carin96011@hotmail.com', 'hola123')">Crear Cuenta</a>
+                <div class="container">
+                  <button class="btn btn-outline-danger" (click)="log.login('Google')" >Entrar con Google</button>
+                </div>
+                <div class="dropdown-divider"></div>  
+
+                <div class="container">
+                  <h5>Tienes cuenta?</h5>
+                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                       <label class="sr-only" for="exampleInputPassword2">Password</label>
+                       <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                    </div>
+                    <div class="form-group container">
+                       <button type="submit" class="btn btn-outline-primary btn-block" (click)="log.login('Mail', 'oscarin962011@hotmail.com', 'hola123')">Entrar</button>                                             
+                    </div>
+                 </form>
+                </div>
+                <div class="dropdown-divider"></div> 
+                <div class="container">
+                  <a class="dropdown-item login" routerLink="/login">Crear Cuenta</a>
+                </div>             
               </div>
+              
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username !== 'Entrar')">
                 <a class="dropdown-item" routerLink="" (click)="log.login('Google')" >Mis Ordenes</a>
                 <a class="dropdown-item" routerLink="/admin/orders" (click)="log.login('Mail', 'oscarin962011@hotmail.com', 'hola123')" >Manejar Ordenes</a>

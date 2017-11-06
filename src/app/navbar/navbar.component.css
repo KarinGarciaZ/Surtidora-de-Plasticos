@@ -30,3 +30,8 @@ img{
 .dropdown-menu{
     left: auto;
 }
+
+.login{
+    border-radius: 5px;
+    background-color: #A6E3F5;
+}
