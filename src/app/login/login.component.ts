@@ -9,9 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   form = new FormGroup({
-    mail: new FormControl('',Validators.required),
-    password: new FormControl('',Validators.required),
-    password2: new FormControl('',Validators.required)
+    mail: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    password2: new FormControl('',[Validators.required, Validators.minLength(6)])
   });
 
     
@@ -22,6 +22,17 @@ export class LoginComponent implements OnInit {
    login(){
      console.log(this.form)
    }
+
+   get mail(){
+     return this.form.get('mail');
+   }
+   get password(){
+    return this.form.get('password');
+  }
+  get password2(){
+    return this.form.get('password2');
+  }
+
 
   ngOnInit() {
   }

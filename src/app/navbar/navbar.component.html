@@ -55,17 +55,14 @@
 
                 <div class="container">
                   <h5>Tienes cuenta?</h5>
-                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                    <div class="form-group">
-                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                    </div>
-                    <div class="form-group">
-                       <label class="sr-only" for="exampleInputPassword2">Password</label>
-                       <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                    </div>
+                  <form [formGroup]="form" (ngSubmit)="log.login('Mail',mail.value, password.value)">  
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>                  
+                    <input formControlName="mail" type="text" class="form-control" id="mail" placeholder="Email">          
+                    <br>     
+                    <input formControlName="password" type="password" class="form-control" id="password" placeholder="Contraseña">
+                    <br>            
                     <div class="form-group container">
-                       <button type="submit" class="btn btn-outline-primary btn-block" (click)="log.login('Mail', 'oscarin962011@hotmail.com', 'hola123')">Entrar</button>                                             
+                       <button type="submit" class="btn btn-outline-primary btn-block">Entrar</button>                                             
                     </div>
                  </form>
                 </div>
@@ -85,8 +82,6 @@
           </li>
         </ul> 
       </div> 
-    </div>
-    
-  </div> 
-        
+    </div>    
+  </div>         
 </nav>

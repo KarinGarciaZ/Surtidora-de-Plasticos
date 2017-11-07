@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 
 
@@ -7,7 +8,7 @@ import * as firebase from 'firebase';
 export class LoginService {
   username: string = 'Entrar';
 
-  constructor( private afAuth: AngularFireAuth ) { 
+  constructor( private afAuth: AngularFireAuth, public router: Router ) { 
     afAuth.authState.subscribe( resp => {
       if (resp)
         if (resp.displayName)
@@ -43,10 +44,12 @@ export class LoginService {
       });    
   }
 
-  createUserMail(kind, mail?, pass?){
-    if ( kind === 'Mail') 
+  createUserMail(mail, pass){
       this.afAuth.auth.createUserWithEmailAndPassword(mail, pass).then(resolved => { 
-        this.checkUser();
+        if( resolved ) {
+          this.checkUser();
+          this.router.navigate(['/']);
+        }
       }).catch(function (e : Error) {
         if ( e.message === 'The email address is already in use by another account.')
           alert("Ususrio ya existe.")

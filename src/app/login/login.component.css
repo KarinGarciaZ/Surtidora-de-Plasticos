@@ -1,0 +1,15 @@
+.formLogin{
+    border: 2px solid #555;
+    margin: 100px 0;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.boton{
+    text-align: center;
+}
+
+button
+{
+    cursor: pointer;
+}

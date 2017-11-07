@@ -1,34 +1,65 @@
 <div class="container">  
     <div class="container">
-        <form [formGroup] = "form" (ngSubmit) = "login()">
-            <div *ngIf = "form.errors" class="alert alert-danger">error in the login</div>
-            
-              <label for="mail">Email</label>
-              <input 
-                  formControlName="mail"
-                  id="mail" 
-                  type="text" 
-                  class="form-control">                       
-          
-              <label for="password">Contraseña</label>
-              <input 
-                  formControlName = "password"
-                  id="password" 
-                  type="text" 
-                  class="form-control">  
-                  
-              <label for="password2">Confirmar Contraseña</label>
-              <input 
-                  formControlName = "password2"
-                  id="password2" 
-                  type="text" 
-                  class="form-control"> 
-
-              <div *ngIf = "mail.touched && mail.invalid" class="alert alert-danger">
-                  <div *ngIf = "password.value != password2.value">Contraseñas no son iguales</div>                        
-              </div> 
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6 formLogin">
+                <form [formGroup] = "form" (ngSubmit) = "log.createUserMail(mail.value, password.value)">
+                    <div *ngIf = "form.errors" class="alert alert-danger">
+                        Error en la ventana.
+                    </div>
+                    
+                    <label for="mail">Email</label>
+                    <input 
+                        formControlName="mail"
+                        id="mail" 
+                        type="text" 
+                        class="form-control">      
+                    <div class="alert alert-danger" *ngIf="mail.touched && mail.invalid">
+                         Email incorrecto.
+                    </div>                 
+                
+                    <label for="password">Contraseña</label>
+                    <input 
+                        formControlName = "password"
+                        id="password" 
+                        type="password" 
+                        class="form-control">  
+                    <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                        <div *ngIf="password.errors.required">
+                            Contraseña requerida.
+                        </div>
+                        <div *ngIf="password.errors.minlength">
+                            Deben ser mínimo {{ password.errors.minlength.requiredLength }} caracteres.
+                        </div>
+                    </div>
                         
-            <button class="btn btn-primary" type="submit">Registrarse</button>
-        </form>        
+                    <label for="password2">Confirmar Contraseña</label>
+                    <input 
+                        formControlName = "password2"
+                        id="password2" 
+                        type="password" 
+                        class="form-control"> 
+                    <div class="alert alert-danger" *ngIf="password2.touched && password2.invalid">
+                        <div *ngIf="password2.errors.required">
+                            Contraseña requerida.
+                        </div>
+                        <div *ngIf="password2.errors.minlength">
+                            Deben ser mínimo {{ password2.errors.minlength.requiredLength }} caracteres.
+                        </div>                        
+                    </div>
+                    <div class="alert alert-danger" *ngIf="password2.touched && password.value !== password2.value">
+                            Contraseñas no coinciden.
+                    </div>
+
+                    <br>                       
+                    <div class="boton">
+                        <button class="btn btn-primary" type="submit" [disabled]="password2.invalid || password.invalid || mail.invalid || password.value !== password2.value">Registrarse</button>
+                    </div>                  
+                </form>
+            </div>
+            <div class="col-3">                    
+            </div>
+        </div>                
     </div>
 </div> <!-- /container -->
