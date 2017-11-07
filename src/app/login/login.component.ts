@@ -8,6 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  createAccount: boolean = false;
+
   form = new FormGroup({
     mail: new FormControl('',[Validators.required, Validators.email]),
     password: new FormControl('',[Validators.required, Validators.minLength(6)]),
@@ -17,6 +19,10 @@ export class LoginComponent implements OnInit {
     
   constructor(public log: LoginService) {
     
+   }
+
+   toggleAccount(){
+     this.createAccount = this.log.toggleAccount(this.createAccount);
    }
   
    login(){

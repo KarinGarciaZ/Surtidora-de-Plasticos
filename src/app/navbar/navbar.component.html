@@ -34,7 +34,7 @@
   <div class="col-3">
     <div class="row">
       <div class="col-3">
-          
+        <i class="fa fa-shopping-cart fa-2x" style="color: #AAA" aria-hidden="true"></i>
       </div>  
       <div class="col-9">
         <ul class="navbar-nav">
@@ -43,20 +43,19 @@
           </li>        
           <li ngbDropdown class="nav-item dropdown">
             <div class="btn-group">
-              <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/categories">{{ log.username }}</a>
+              <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/categories"><i class="fa fa-user-o" aria-hidden="true"></i>  {{ log.username }}</a>
               <a ngbDropdownToggle class="btn btn-outline-secondary nav-link dropdown-toggle button-navbar"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               </a>
 
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username === 'Entrar')">
                 <div class="container">
-                  <button class="btn btn-outline-danger" (click)="log.login('Google')" >Entrar con Google</button>
+                  <button class="btn btn-outline-danger" (click)="log.createUserMail('Google')" >Entrar con Google  <i class="fa fa-google-plus" aria-hidden="true"></i></button>
                 </div>
                 <div class="dropdown-divider"></div>  
 
                 <div class="container">
                   <h5>Tienes cuenta?</h5>
-                  <form [formGroup]="form" (ngSubmit)="log.login('Mail',mail.value, password.value)">  
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>                  
+                  <form [formGroup]="form" (ngSubmit)="log.login(mail.value, password.value)">               
                     <input formControlName="mail" type="text" class="form-control" id="mail" placeholder="Email">          
                     <br>     
                     <input formControlName="password" type="password" class="form-control" id="password" placeholder="Contraseña">

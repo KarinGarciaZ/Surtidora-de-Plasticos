@@ -1,3 +1,4 @@
+import { GuardService } from './guard.service';
 import { LoginService } from './login/login.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,15 +48,17 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'categories', component: CategoriesComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'check-out', component: CheckOutComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/products', component: AdminProductsComponent },
-      { path: 'admin/orders', component: AdminOrdersComponent }
+
+      { path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[GuardService] },
+      { path: 'check-out', component: CheckOutComponent, canActivate:[GuardService] },      
+      { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService] },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[GuardService] }
     ])
   ],
   providers: [
-    LoginService
+    LoginService,
+    GuardService
   ],
   bootstrap: [AppComponent]
 })
