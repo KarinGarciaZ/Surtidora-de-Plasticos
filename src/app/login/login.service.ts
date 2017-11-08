@@ -38,7 +38,10 @@ export class LoginService {
   }   
   
 
-  login(mail, pass){         
+  login(mail, pass){   
+    let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    localStorage.setItem('returnUrl', returnUrl);
+          
       this.afAuth.auth.signInWithEmailAndPassword(mail, pass).then(resolved => { 
         this.checkUser();
       }).catch(function (e : Error) {

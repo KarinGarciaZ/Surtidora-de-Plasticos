@@ -6,10 +6,11 @@
             <div class="col-6 formLogin">
                 <div class="container">
                     <button class="btn btn-outline-danger" (click)="log.createUserMail('Google')" >Entrar con Google  <i class="fa fa-google-plus" aria-hidden="true"></i></button>
-                    <button *ngIf="!createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()" >Crear cuenta</button>
+                    <button *ngIf="!createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Crear cuenta</button>
+                    <button *ngIf="createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Ya tengo cuenta</button>
                 </div> 
                 <hr>
-                <form [formGroup] = "form" (ngSubmit) = "(createAccount)? log.createUserMail('Mail', mail.value, password.value): login(mail.value, password.value)">
+                <form [formGroup] = "form" (ngSubmit) = "(createAccount)? log.createUserMail('Mail', mail.value, password.value): log.login(mail.value, password.value)">
                     <div *ngIf = "form.errors" class="alert alert-danger">
                         Error en la ventana.
                     </div>                            
