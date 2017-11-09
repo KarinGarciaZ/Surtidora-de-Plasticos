@@ -11,9 +11,10 @@ export class LoginComponent implements OnInit {
   createAccount: boolean = false;
 
   form = new FormGroup({
-    mail: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    password2: new FormControl('',[Validators.required, Validators.minLength(6)])
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    mail: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password2: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
     
@@ -26,6 +27,10 @@ export class LoginComponent implements OnInit {
    }
   
    login(){
+   }
+
+   get name(){
+     return this.form.get('name');
    }
 
    get mail(){

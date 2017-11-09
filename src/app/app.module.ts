@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { GuardService } from './guard.service';
 import { LoginService } from './login/login.service';
 import { environment } from './../environments/environment';
@@ -58,7 +59,8 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
   ],
   providers: [
     LoginService,
-    GuardService
+    GuardService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

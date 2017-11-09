@@ -14,8 +14,7 @@ export class LoginService {
     private afAuth: AngularFireAuth, 
     public router: Router,
     private route: ActivatedRoute 
-  ) { 
-
+  ) {  
     this.user = afAuth.authState;
     afAuth.authState.subscribe( resp => {
       if (resp)
@@ -25,15 +24,13 @@ export class LoginService {
           this.username = resp.email;
       else
         this.username = 'Entrar';
-    });
+    });   
   }  
 
-  checkUser(){
+  checkUser(name?) {
     this.afAuth.authState.subscribe( resp => {
-      if (resp.displayName)
-        this.username = resp.displayName;
-      else
-        this.username = resp.email;
+      if ( name ) resp.updateProfile({ displayName: name, photoURL: '' }).then( () => this.checkUser());
+      this.username = ( resp.displayName )? resp.displayName : resp.email; 
     });
   }   
   
@@ -52,7 +49,7 @@ export class LoginService {
       });    
   }
 
-  createUserMail(kind, mail?, pass?){
+  createUserMail(kind, mail?, pass?, name?){
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
     
@@ -61,7 +58,8 @@ export class LoginService {
     if ( kind === 'Mail')  
       this.afAuth.auth.createUserWithEmailAndPassword(mail, pass).then(resolved => { 
           if( resolved ) {
-            this.checkUser();
+            this.checkUser(name);
+            //this.user = this.afAuth.authState;
           }
         }).catch(function (e : Error) {
           if ( e.message === 'The email address is already in use by another account.')

@@ -10,11 +10,27 @@
                     <button *ngIf="createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Ya tengo cuenta</button>
                 </div> 
                 <hr>
-                <form [formGroup] = "form" (ngSubmit) = "(createAccount)? log.createUserMail('Mail', mail.value, password.value): log.login(mail.value, password.value)">
+                <form [formGroup] = "form" (ngSubmit) = "(createAccount)? log.createUserMail('Mail', mail.value, password.value, name.value): log.login(mail.value, password.value)">
                     <div *ngIf = "form.errors" class="alert alert-danger">
                         Error en la ventana.
                     </div>                            
-                                          
+                    
+                    <div *ngIf="createAccount">
+                        <label for="mail">Nombre</label>
+                        <input 
+                            formControlName="name"
+                            id="name" 
+                            type="text" 
+                            class="form-control">      
+                        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                            <div *ngIf="name.errors.required">
+                                Nombre requerido.
+                            </div>
+                            <div *ngIf="name.errors.minlength">
+                                Deben ser mínimo {{ name.errors.minlength.requiredLength }} caracteres.
+                            </div>
+                        </div>
+                    </div>                    
                                         
                     <label for="mail">Email</label>
                     <input 

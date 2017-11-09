@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
 import { Component } from '@angular/core';
@@ -8,12 +9,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor ( private log: LoginService, router: Router ) {
+  constructor ( private log: LoginService, private userService: UserService, router: Router ) {
     log.user.subscribe( user => {
-      if ( user ) {
+      if ( user ) {   
+        userService.save(user);
+        
         let returnUrl = localStorage.getItem('returnUrl'); 
-        router.navigateByUrl( returnUrl );
+        userService.save(user);
         localStorage.removeItem('returnUrl');
+        
       }
     })
   }
