@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
 export class LoginService {
   username: string = 'Entrar';
   user: Observable<firebase.User>;
-
+  count: number = 0;
+ 
   constructor( 
     private afAuth: AngularFireAuth, 
     public router: Router,
@@ -24,14 +25,19 @@ export class LoginService {
           this.username = resp.email;
       else
         this.username = 'Entrar';
-    });   
+    });  
   }  
 
   checkUser(name?) {
+    this.count += 1;    
     this.afAuth.authState.subscribe( resp => {
       if ( name ) resp.updateProfile({ displayName: name, photoURL: '' }).then( () => this.checkUser());
       this.username = ( resp.displayName )? resp.displayName : resp.email; 
     });
+    if ( this.count == 2 ){
+      window.location.reload(true);
+      this.count = 0;
+    }      
   }   
   
 
