@@ -73,7 +73,7 @@
               
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username !== 'Entrar')">
                 <a class="dropdown-item" routerLink="" (click)="log.login('Google')" >Mis Ordenes</a>
-                <a class="dropdown-item" routerLink="/admin/orders" (click)="log.login('Mail', 'oscarin962011@hotmail.com', 'hola123')" >Manejar Ordenes</a>
+                <a class="dropdown-item" routerLink="/admin/orders" >Manejar Ordenes</a>
                 <a class="dropdown-item" routerLink="/admin/products">Manejar Productos</a>
                 <a class="dropdown-item" href="/" (click)="log.logout()">Salir</a>
               </div>

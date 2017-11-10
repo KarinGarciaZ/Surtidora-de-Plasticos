@@ -1,3 +1,4 @@
+import { AdminGuardService } from './admin-guard.service';
 import { UserService } from './user.service';
 import { GuardService } from './guard.service';
 import { LoginService } from './login/login.service';
@@ -53,14 +54,16 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 
       { path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[GuardService] },
       { path: 'check-out', component: CheckOutComponent, canActivate:[GuardService] },      
-      { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[GuardService] }
+      
+      { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService, AdminGuardService] },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[GuardService, AdminGuardService] }
     ])
   ],
   providers: [
     LoginService,
     GuardService,
-    UserService
+    UserService,
+    AdminGuardService
   ],
   bootstrap: [AppComponent]
 })
