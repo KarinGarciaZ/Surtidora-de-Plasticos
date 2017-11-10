@@ -10,6 +10,7 @@ export class LoginService {
   username: string = 'Entrar';
   user: Observable<firebase.User>;
   count: number = 0;
+  createAccount: boolean = false;
  
   constructor( 
     private afAuth: AngularFireAuth, 
@@ -78,9 +79,5 @@ export class LoginService {
   logout(){
     this.afAuth.auth.signOut();
     this.username = 'Entrar';
-  }
-
-  toggleAccount(ban){
-    return !ban;
   }
 }

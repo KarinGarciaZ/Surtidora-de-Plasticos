@@ -41,13 +41,13 @@
           <li class="nav-item">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
           </li>        
-          <li ngbDropdown class="nav-item dropdown">
+          <li ngbDropdown>
             <div class="btn-group">
               <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/categories"><i class="fa fa-user-o" aria-hidden="true"></i>  {{ log.username }}</a>
               <a ngbDropdownToggle class="btn btn-outline-secondary nav-link dropdown-toggle button-navbar"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               </a>
 
-              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username === 'Entrar')">
+              <div ngbDropdownMenu *ngIf="(log.username === 'Entrar')">
                 <div class="container">
                   <button class="btn btn-outline-danger" (click)="log.createUserMail('Google')" >Entrar con Google  <i class="fa fa-google-plus" aria-hidden="true"></i></button>
                 </div>
@@ -66,8 +66,8 @@
                  </form>
                 </div>
                 <div class="dropdown-divider"></div> 
-                <div class="container">
-                  <a class="dropdown-item login" routerLink="/login">Crear Cuenta</a>
+                <div class="login">
+                  <a class="btn btn-outline-secondary" (click)="settingCreateAccount()" routerLink="/login">Crear Cuenta</a>
                 </div>             
               </div>
               

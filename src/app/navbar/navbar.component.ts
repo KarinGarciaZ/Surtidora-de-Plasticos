@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  settingCreateAccount(){
+    this.log.createAccount = true;
+  }
+
   get mail(){
     return this.form.get('mail');
   }

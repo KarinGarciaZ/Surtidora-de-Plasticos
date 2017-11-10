@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  createAccount: boolean = false;
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -21,12 +20,13 @@ export class LoginComponent implements OnInit {
   constructor(public log: LoginService) {
     
    }
+   
+  ngOnInit() {
+  }
+
 
    toggleAccount(){
-     this.createAccount = this.log.toggleAccount(this.createAccount);
-   }
-  
-   login(){
+     this.log.createAccount = !this.log.createAccount;
    }
 
    get name(){
@@ -43,8 +43,5 @@ export class LoginComponent implements OnInit {
     return this.form.get('password2');
   }
 
-
-  ngOnInit() {
-  }
 
 }

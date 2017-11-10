@@ -6,16 +6,16 @@
             <div class="col-6 formLogin">
                 <div class="container">
                     <button class="btn btn-outline-danger" (click)="log.createUserMail('Google')" >Entrar con Google  <i class="fa fa-google-plus" aria-hidden="true"></i></button>
-                    <button *ngIf="!createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Crear cuenta</button>
-                    <button *ngIf="createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Ya tengo cuenta</button>
+                    <button *ngIf="!log.createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Crear cuenta</button>
+                    <button *ngIf="log.createAccount" class="btn btn-outline-primary pull-right" (click)="toggleAccount()">Ya tengo cuenta</button>
                 </div> 
                 <hr>
-                <form [formGroup] = "form" (ngSubmit) = "(createAccount)? log.createUserMail('Mail', mail.value, password.value, name.value): log.login(mail.value, password.value)">
+                <form [formGroup] = "form" (ngSubmit) = "(log.createAccount)? log.createUserMail('Mail', mail.value, password.value, name.value): log.login(mail.value, password.value)">
                     <div *ngIf = "form.errors" class="alert alert-danger">
                         Error en la ventana.
                     </div>                            
                     
-                    <div *ngIf="createAccount">
+                    <div *ngIf="log.createAccount">
                         <label for="mail">Nombre</label>
                         <input 
                             formControlName="name"
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                         
-                    <div *ngIf="createAccount">
+                    <div *ngIf="log.createAccount">
                         <label for="password2">Confirmar Contraseña</label>
                         <input 
                             formControlName = "password2"
@@ -79,8 +79,8 @@
 
                     <br>                       
                     <div class="boton">
-                        <button *ngIf="createAccount" class="btn btn-primary" type="submit" [disabled]="password2.invalid || password.invalid || mail.invalid || password.value !== password2.value">Registrarse</button>
-                        <button *ngIf="!createAccount" class="btn btn-primary" type="submit" [disabled]="password.invalid || mail.invalid">Registrarse</button>
+                        <button *ngIf="log.createAccount" class="btn btn-primary" type="submit" [disabled]="password2.invalid || password.invalid || mail.invalid || password.value !== password2.value">Registrarse</button>
+                        <button *ngIf="!log.createAccount" class="btn btn-primary" type="submit" [disabled]="password.invalid || mail.invalid">Registrarse</button>
                     </div>                  
                 </form>
             </div>
