@@ -16,7 +16,7 @@ export class UserService {
   }
 
   get(uid: string): FirebaseObjectObservable<AppUser>  {
-    console.log(this.db.object('/users/' + uid));
+    console.log('jeje', this.db.object('/users/' + uid));
     return this.db.object('/users/' + uid);
   }
 }
