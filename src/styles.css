@@ -5,3 +5,12 @@
 body {
     padding-top: 70px;
 }
+
+.btn-grabar{
+  text-align: center;
+}
+
+button
+{
+  cursor: pointer;
+}

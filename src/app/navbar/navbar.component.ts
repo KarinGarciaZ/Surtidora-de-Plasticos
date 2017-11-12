@@ -1,3 +1,4 @@
+import { AppUser } from './../models/app-user';
 import { LoginService } from './../login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,7 +14,11 @@ export class NavbarComponent implements OnInit {
     password: new FormControl('',Validators.required)    
   });
 
-  constructor( private log: LoginService ) { }
+  appUser: AppUser;
+
+  constructor( private log: LoginService) {
+    log.appUser.subscribe(appUser => this.appUser = appUser)
+   }
 
   ngOnInit() {
   }

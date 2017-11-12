@@ -1,6 +1,9 @@
-import { AdminGuardService } from './admin-guard.service';
-import { UserService } from './user.service';
-import { GuardService } from './guard.service';
+import { BrandsService } from './services/brands.service';
+import { ProductService } from './services/product.service';
+import { CategoryService } from './services/category.service';
+import { AdminGuardService } from './services/admin-guard.service';
+import { UserService } from './services/user.service';
+import { GuardService } from './services/guard.service';
 import { LoginService } from './login/login.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,8 +24,13 @@ import { CategoriesComponent } from './categories/categories.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './check-out/check-out.component';
-import { AdminProductsComponent } from './admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoriesFormComponent } from './admin/categories-form/categories-form.component';
+import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
+import { AdminBrandsComponent } from './admin/admin-brands/admin-brands.component';
+import { BrandsFormComponent } from './admin/brands-form/brands-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,12 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
     ShoppingCartComponent,
     CheckOutComponent,
     AdminProductsComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    ProductFormComponent,
+    CategoriesFormComponent,
+    AdminCategoriesComponent,
+    AdminBrandsComponent,
+    BrandsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,18 +65,26 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
       { path: 'categories', component: CategoriesComponent },
       { path: 'login', component: LoginComponent },
 
-      { path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[GuardService] },
-      { path: 'check-out', component: CheckOutComponent, canActivate:[GuardService] },      
+      { path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[GuardService]},
+      { path: 'check-out', component: CheckOutComponent, canActivate:[GuardService]},      
       
-      { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService, AdminGuardService] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[GuardService, AdminGuardService] }
+      { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/categories', component: AdminCategoriesComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/brands', component: AdminBrandsComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/brands/new', component: BrandsFormComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/categories/new', component: CategoriesFormComponent, canActivate:[GuardService, AdminGuardService]}
     ])
   ],
   providers: [
     LoginService,
     GuardService,
     UserService,
-    AdminGuardService
+    AdminGuardService, 
+    CategoryService,
+    ProductService,
+    BrandsService
   ],
   bootstrap: [AppComponent]
 })

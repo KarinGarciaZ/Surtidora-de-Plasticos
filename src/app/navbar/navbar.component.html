@@ -73,8 +73,12 @@
               
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username !== 'Entrar')">
                 <a class="dropdown-item" routerLink="" (click)="log.login('Google')" >Mis Ordenes</a>
-                <a class="dropdown-item" routerLink="/admin/orders" >Manejar Ordenes</a>
-                <a class="dropdown-item" routerLink="/admin/products">Manejar Productos</a>
+                <ng-container *ngIf="appUser.admin">
+                  <a class="dropdown-item" routerLink="/admin/orders" >Manejar Ordenes</a>
+                  <a class="dropdown-item" routerLink="/admin/products">Manejar Productos</a>
+                  <a class="dropdown-item" routerLink="/admin/categories">Manejar Categorías</a>
+                  <a class="dropdown-item" routerLink="/admin/brands">Manejar Marcas</a>
+                </ng-container>
                 <a class="dropdown-item" href="/" (click)="log.logout()">Salir</a>
               </div>
             </div>     

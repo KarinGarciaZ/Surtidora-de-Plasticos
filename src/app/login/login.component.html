@@ -78,7 +78,7 @@
                     </div>                    
 
                     <br>                       
-                    <div class="boton">
+                    <div class="btn-grabar">
                         <button *ngIf="log.createAccount" class="btn btn-primary" type="submit" [disabled]="password2.invalid || password.invalid || mail.invalid || password.value !== password2.value">Registrarse</button>
                         <button *ngIf="!log.createAccount" class="btn btn-primary" type="submit" [disabled]="password.invalid || mail.invalid">Registrarse</button>
                     </div>                  
