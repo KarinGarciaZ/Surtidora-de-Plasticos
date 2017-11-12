@@ -31,6 +31,7 @@ import { CategoriesFormComponent } from './admin/categories-form/categories-form
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminBrandsComponent } from './admin/admin-brands/admin-brands.component';
 import { BrandsFormComponent } from './admin/brands-form/brands-form.component';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { BrandsFormComponent } from './admin/brands-form/brands-form.component';
   imports: [
     BrowserModule,
     FormsModule,
+    CustomFormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
