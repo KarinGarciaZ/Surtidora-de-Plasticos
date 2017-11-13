@@ -1,55 +1,68 @@
 <div class="container">
-  <form #f="ngForm"(ngSubmit)="save(f.value)">
-    <div class="form-group">
-      <label for="title">Nombre</label>
-      <input ngModel #title="ngModel" name="title" id="title" type="text" class="form-control" required>
-      <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
-        El nombre del producto es requerido.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="price">Precio</label>
-      <div class="input-group">
-        <span class="input-group-addon">$</span>
-        <input ngModel #price="ngModel" name="price" id="price" type="number" class="form-control" required>
+  <div class="row form-products">
+    <div class="col-md-6">
+      <form #f="ngForm"(ngSubmit)="save(f.value)">
+        <div class="form-group">
+          <label for="title">Nombre</label>
+          <input ngModel #title="ngModel" name="title" id="title" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+            El nombre del producto es requerido.
+          </div>
         </div>
-      <div class="alert alert-danger" *ngIf="price.touched && (price.invalid || price.value < 0)">
-        <div *ngIf="price.invalid">Precio requerido.</div>
-        <div *ngIf="price.value < 0">Precio debe ser como mínimo $ 0.00.</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="category">Categoría</label>
-      <select ngModel #category="ngModel" name="category" id="category" type="number" class="form-control" required>
-        <option value=""></option>
-        <option *ngFor="let c of categories$ | async" [value]="c.$key">
-          {{ c.name }}
-        </option>
-      </select>
-      <div class="alert alert-danger" *ngIf="category.touched && category.value == ''">
-        Categoría obligatoria.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="brand">Marcas</label>
-      <select ngModel #brand="ngModel" name="brand" id="brand" type="number" class="form-control" required>
-        <option value=""></option>
-        <option *ngFor="let b of brands$ | async" [value]="b.$key">
-          {{ b.name }}
-        </option>
-      </select>
-      <div class="alert alert-danger" *ngIf="brand.touched && brand.value == ''">
-          Marca obligatoria.
+        <div class="form-group">
+          <label for="price">Precio</label>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input ngModel #price="ngModel" name="price" id="price" type="number" class="form-control" required>
+            </div>
+          <div class="alert alert-danger" *ngIf="price.touched && (price.invalid || price.value < 0)">
+            <div *ngIf="price.invalid">Precio requerido.</div>
+            <div *ngIf="price.value < 0">Precio debe ser como mínimo $ 0.00.</div>
+          </div>
         </div>
+        <div class="form-group">
+          <label for="category">Categoría</label>
+          <select ngModel #category="ngModel" name="category" id="category" type="number" class="form-control" required>
+            <option value=""></option>
+            <option *ngFor="let c of categories$ | async" [value]="c.$key">
+              {{ c.name }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="category.touched && category.value == ''">
+            Categoría obligatoria.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="brand">Marcas</label>
+          <select ngModel #brand="ngModel" name="brand" id="brand" type="number" class="form-control" required>
+            <option value=""></option>
+            <option *ngFor="let b of brands$ | async" [value]="b.$key">
+              {{ b.name }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="brand.touched && brand.value == ''">
+              Marca obligatoria.
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Foto</label>
+          <input ngModel #imageUrl="ngModel" name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
+          <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+            <div *ngIf="imageUrl.errors.required">Imagen es requerida.</div>
+            <div *ngIf="imageUrl.errors.url">Favor de ingresar una ruta valida.</div>        
+          </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="title.invalid || price.invalid || brand.invalid || category.invalid">Save</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="imageUrl">Foto</label>
-      <input ngModel #imageUrl="ngModel" name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
-      <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
-        <div *ngIf="imageUrl.errors.required">Imagen es requerida.</div>
-        <div *ngIf="imageUrl.errors.url">Favor de ingresar una ruta valida.</div>        
+    <div class="col-md-6">
+      <div class="card" style="width: 30rem;">
+        <img class="card-img-top" [src]="imageUrl.value" alt="Producto">
+        <div class="card-body">
+          <h4 class="card-title">{{ title.value }}</h4>
+          <p class="card-text">{{ price.value | currency:'MXN':true }}</p>
+        </div>
       </div>
     </div>
-    <button class="btn btn-primary" [disabled]="title.invalid || price.invalid || brand.invalid || category.invalid">Save</button>
-  </form>
+  </div>  
 </div>

@@ -1,6 +1,7 @@
 import { BrandsService } from './../../services/brands.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-brands-form',

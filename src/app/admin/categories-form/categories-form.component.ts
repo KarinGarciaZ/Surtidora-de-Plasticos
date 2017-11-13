@@ -2,6 +2,7 @@ import { CategoryService } from './../../services/category.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-categories-form',
@@ -12,7 +13,7 @@ export class CategoriesFormComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    image: new FormControl('', [Validators.required]),
+    image: new FormControl('', [Validators.required, CustomValidators.url]),
   });
   constructor(private categoryService: CategoryService) { }
 
