@@ -13,7 +13,7 @@ export class CategoriesFormComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    image: new FormControl('', [Validators.required, CustomValidators.url]),
+    image: new FormControl('', [Validators.required]),
   });
   constructor(private categoryService: CategoryService) { }
 
@@ -26,6 +26,11 @@ export class CategoriesFormComponent implements OnInit {
 
   get image() {
     return this.form.get('image');
+  }
+
+  onChange(event) {
+    var files = event.srcElement.files.name;
+    
   }
 
   save(){

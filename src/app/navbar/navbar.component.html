@@ -71,7 +71,7 @@
                 </div>             
               </div>
               
-              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username !== 'Entrar')">
+              <div ngbDropdownMenu class="dropdown-menu display" aria-labelledby="navbarDropdownMenuLink" *ngIf="(log.username !== 'Entrar')">
                 <a class="dropdown-item" routerLink="" (click)="log.login('Google')" >Mis Ordenes</a>
                 <ng-container *ngIf="appUser.admin">
                   <a class="dropdown-item" routerLink="/admin/orders" >Manejar Ordenes</a>

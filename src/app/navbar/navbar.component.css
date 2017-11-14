@@ -39,3 +39,8 @@ img{
     color: #AAA;
     cursor: pointer;
 }
+
+.display{
+  top: 40px !important;
+  left: 80px !important;
+}

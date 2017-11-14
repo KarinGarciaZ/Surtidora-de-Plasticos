@@ -1,30 +1,33 @@
-<div class="row">
-  <div class="col-3">
-
-  </div>
-  <div class="col-6 form-categories">
-    <form [formGroup]="form" (submit)="save()">
-      <div class="form-group">
-        <label for="title">Nombre</label>
-        <input formControlName="name" id="title" type="text" class="form-control">
-        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
-          <div *ngIf="name.errors.minlength">Deben ser minimo 3 letras.</div>
-          <div *ngIf="name.errors.required">Debe agregar un nombre.</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6 form-categories">
+      <form [formGroup]="form" (submit)="save()">
+        <div class="form-group">
+          <label for="title">Nombre</label>
+          <input formControlName="name" id="title" type="text" class="form-control">
+          <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+            <div *ngIf="name.errors.minlength">Deben ser minimo 3 letras.</div>
+            <div *ngIf="name.errors.required">Debe agregar un nombre.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Foto</label>
+          <input formControlName="image" id="imageUrl" type="file" (change)="onChange($event)">
+          <div class="alert alert-danger" *ngIf="image.invalid && image.touched">
+            <div *ngIf="image.errors.required">Debe asignar la url de la imagen.</div>
+          </div>
+        </div>
+        <div class="btn-grabar">
+          <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid">Grabar</button>
+        </div>        
+      </form>
+    </div>
+    <div class="col-6">
+      <div class="card" style="width: 30rem;">
+        <img class="card-img-top" [src]="image.value" alt="Producto">
+        <div class="card-body">
+          <h4 class="card-title">{{ name.value }}</h4>
         </div>
       </div>
-      <div class="form-group">
-        <label for="imageUrl">Foto</label>
-        <input formControlName="image" id="imageUrl" type="text" class="form-control">
-        <div class="alert alert-danger" *ngIf="image.invalid && image.touched">
-          <div *ngIf="image.errors.required">Debe asignar la url de la imagen.</div>
-          <div *ngIf="image.errors.url">Url no valida.</div>
-        </div>
-      </div>
-      <div class="btn-grabar">
-        <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid">Grabar</button>
-      </div>        
-    </form>
-  </div>
-  <div class="col-3">
-      
-  </div> 
+    </div> 
+</div>
