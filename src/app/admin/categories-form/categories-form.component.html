@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6 form-categories">
+  <div class="row form-categories">
+    <div class="col-6">
       <form [formGroup]="form" (submit)="save()">
         <div class="form-group">
           <label for="title">Nombre</label>
@@ -10,21 +10,29 @@
             <div *ngIf="name.errors.required">Debe agregar un nombre.</div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="imageUrl">Foto</label>
-          <input formControlName="image" id="imageUrl" type="file" (change)="onChange($event)">
+        <div class="btn-grabar">
+          <a class="btn btn-outline-primary" *ngIf="!web" (click)="toggleWeb()">Elegir foto de Internet</a>
+          <a class="btn btn-outline-info" *ngIf="web" (click)="toggleWeb()">Elegir foto local</a>
+        </div>  
+        <div *ngIf="!web" class="btn-grabar">
+          <input type="file" (change)="onChange($event)">
+        </div>        
+        <div class="form-group" *ngIf="web">
+          <label for="imageUrl">URL de la Foto</label>
+          <input formControlName="image" id="imageUrl" type="text" class="form-control">
           <div class="alert alert-danger" *ngIf="image.invalid && image.touched">
             <div *ngIf="image.errors.required">Debe asignar la url de la imagen.</div>
+            <div *ngIf="image.errors.url">Debe asignar una url valida.</div>
           </div>
         </div>
         <div class="btn-grabar">
-          <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid">Grabar</button>
+          <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid && web">Grabar</button>
         </div>        
       </form>
     </div>
     <div class="col-6">
-      <div class="card" style="width: 30rem;">
-        <img class="card-img-top" [src]="image.value" alt="Producto">
+      <div class="card" style="width: 25rem;">
+        <img class="card-img-top" src="{{photo}}" alt="Producto">
         <div class="card-body">
           <h4 class="card-title">{{ name.value }}</h4>
         </div>

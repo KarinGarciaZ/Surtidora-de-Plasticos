@@ -14,8 +14,8 @@ export class CategoryService {
     });
   }
 
-  saveCategory(name, imageUrl) {
-    let category = { name, imageUrl };
+  saveCategory(name, imageUrl, web) {
+    let category = { name, imageUrl, web };
     this.db.list('/categories').push(category).then( () => window.location.reload(true));
   }  
 }

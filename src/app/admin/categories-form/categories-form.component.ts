@@ -10,14 +10,19 @@ import { CustomValidators } from 'ng2-validation';
   styleUrls: ['./categories-form.component.css']
 })
 export class CategoriesFormComponent implements OnInit {
-
+  ur; 
+  web = true;
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    image: new FormControl('', [Validators.required]),
+    image: new FormControl('', [Validators.required, CustomValidators.url]),
   });
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+  }
+
+  toggleWeb(){
+    this.web = !this.web;
   }
 
   get name() {
@@ -28,13 +33,17 @@ export class CategoriesFormComponent implements OnInit {
     return this.form.get('image');
   }
 
+  get photo(){
+    return ( this.web )? this.form.get('image').value : '../assets/pictures/CategoriesPictures/'+this.ur;
+  }
+
   onChange(event) {
-    var files = event.srcElement.files.name;
-    
+    console.log('event: ', event);
+    this.ur = event.srcElement.files[0].name;  
   }
 
   save(){
-    this.categoryService.saveCategory( this.name.value, this.image.value );
+    ( this.web )? this.categoryService.saveCategory( this.name.value, this.image.value, true ) : this.categoryService.saveCategory( this.name.value, this.ur, false );
   }
 
 }
