@@ -9,11 +9,7 @@
             <div *ngIf="name.errors.minlength">Deben ser minimo 3 letras.</div>
             <div *ngIf="name.errors.required">Debe agregar un nombre.</div>
           </div>
-        </div>
-        <div class="btn-grabar">
-          <a class="btn btn-outline-primary" *ngIf="!web" (click)="toggleWeb()">Elegir foto de Internet</a>
-          <a class="btn btn-outline-info" *ngIf="web" (click)="toggleWeb()">Elegir foto local</a>
-        </div>  
+        </div>          
         <div *ngIf="!web" class="btn-grabar">
           <input type="file" (change)="onChange($event)">
         </div>        
@@ -25,9 +21,20 @@
             <div *ngIf="image.errors.url">Debe asignar una url valida.</div>
           </div>
         </div>
-        <div class="btn-grabar">
-          <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid && web">Grabar</button>
-        </div>        
+        <div class="row">
+          <div class="col-5">
+            <a *ngIf="!web" (click)="toggleWeb()">Elegir foto de Internet</a>
+            <a *ngIf="web" (click)="toggleWeb()">Elegir foto local</a>
+          </div>
+          <div class="col-4">
+            <div class="btn-grabar">                
+              <button class="btn btn-primary" type="submit" [disabled]="name.invalid || image.invalid && web">Grabar</button>
+            </div>
+          </div>
+          <div class="col-3">
+              
+          </div>
+        </div>                
       </form>
     </div>
     <div class="col-6">

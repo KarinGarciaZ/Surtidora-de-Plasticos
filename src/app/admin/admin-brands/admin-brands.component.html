@@ -1,1 +1,22 @@
-<a routerLink="/admin/brands/new" class="btn btn-primary">Nueva Marca</a>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of brands$ | async">
+        <td>{{ b.$key }}</td>
+        <td>{{ b.name }}</td>      
+        <td>
+          <a class="btn btn-outline-primary" [routerLink]="['/admin/brands/', b.$key]">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <a routerLink="/admin/brands/new" class="btn btn-primary">Nueva Marca</a>
+</div>

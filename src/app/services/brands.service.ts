@@ -18,4 +18,8 @@ export class BrandsService {
       }
     });
   }
+
+  getAll() {
+    return this.db.list('/brands');
+  }
 }

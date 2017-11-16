@@ -1,3 +1,4 @@
+import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-categories.component.css']
 })
 export class AdminCategoriesComponent implements OnInit {
-
-  constructor() { }
+  categories$;
+  constructor( private categoryService: CategoryService) {
+    this.categories$ = this.categoryService.getAll();
+   }
 
   ngOnInit() {
   }

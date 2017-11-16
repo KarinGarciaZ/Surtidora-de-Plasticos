@@ -1,1 +1,22 @@
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of categories$ | async">
+      <td>{{ c.$key }}</td>
+      <td>{{ c.name }}</td>      
+      <td>
+        <a class="btn btn-outline-primary" [routerLink]="['/admin/categories/', c.$key]">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <a routerLink="/admin/categories/new" class="btn btn-primary">Nueva Categoría</a>
+</div>

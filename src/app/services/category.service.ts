@@ -18,4 +18,8 @@ export class CategoryService {
     let category = { name, imageUrl, web };
     this.db.list('/categories').push(category).then( () => window.location.reload(true));
   }  
+
+  getAll() {
+    return this.db.list('/categories');
+  }
 }
