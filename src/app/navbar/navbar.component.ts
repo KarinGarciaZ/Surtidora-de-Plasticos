@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   appUser: AppUser;
 
   constructor( private log: LoginService) {
-    log.appUser.subscribe(appUser => this.appUser = appUser)
+    log.appUser.subscribe(appUser => this.appUser = appUser);
    }
 
   ngOnInit() {
