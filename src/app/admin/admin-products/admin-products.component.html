@@ -1,26 +1,33 @@
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Marca</th>
-        <th>Categoría</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of products$ | async">
-        <td>{{ p.title }}</td>
-        <td>{{ p.price }}</td>
-        <td>{{ p.brand }}</td>
-        <td>{{ p.category }}</td>
-        <td>
+<div class="container busqueda">
+  <p>
+    <input #query (keyup)="filter(query.value)" class="form-control" type="text" placeholder="Buscar producto...">
+  </p>
+
+  <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+    <data-table-column [property]="'title'" [header]="'Nombre'" [sortable]="true" [resizable]="true">
+
+    </data-table-column>
+
+    <data-table-column [property]="'price'" [header]="'Precio'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="product">
+        {{ product.price | currency:'MXN':true }}
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column [property]="'brand'" [header]="'Marca'" [sortable]="true" [resizable]="true">
+
+    </data-table-column>
+
+    <data-table-column [property]="'category'" [header]="'Categoria'" [sortable]="true" [resizable]="true">
+
+    </data-table-column>
+
+    <data-table-column [property]="'$key'">
+      <ng-template #dataTableCell let-item="product">
           <a class="btn btn-outline-primary" [routerLink]="['/admin/products/', p.$key]">Edit</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      </ng-template>
+    </data-table-column>
+  </data-table>
   
   <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </div>

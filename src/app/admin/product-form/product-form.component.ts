@@ -46,4 +46,10 @@ export class ProductFormComponent implements OnInit {
     this.route.navigate(['/admin/products']);
   }
 
+  delete() {
+    if ( confirm('¿Está seguero de que desea eliminar este producto?')) {
+      this.productService.delete(this.id);
+      this.route.navigate(['/admin/products']);
+    }
+  }
 }

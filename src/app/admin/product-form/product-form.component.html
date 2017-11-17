@@ -52,7 +52,8 @@
             <div *ngIf="imageUrl.errors.url">Favor de ingresar una ruta valida.</div>        
           </div>
         </div>
-        <button class="btn btn-primary" [disabled]="title.invalid || price.invalid || brand.invalid || category.invalid">Save</button>
+        <button class="btn btn-primary" [disabled]="title.invalid || price.invalid || brand.invalid || category.invalid">Grabar</button>
+        <button *ngIf="id" type="button" class="btn btn-danger" (click)="delete()">Borrar</button>
       </form>
     </div>
     <div class="col-md-6">
