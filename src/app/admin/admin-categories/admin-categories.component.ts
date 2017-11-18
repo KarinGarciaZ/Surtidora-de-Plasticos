@@ -15,4 +15,11 @@ export class AdminCategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete( id ) {
+    if ( confirm('¿Estás seguro que deseas eliminar la categoría?')) {
+      this.categoryService.delete(id);
+      window.location.reload(true);
+    }
+  }
+
 }

@@ -22,4 +22,8 @@ export class CategoryService {
   getAll() {
     return this.db.list('/categories');
   }
+
+  delete( id ) {
+    this.db.object('/categories/' + id).remove();
+  }
 }

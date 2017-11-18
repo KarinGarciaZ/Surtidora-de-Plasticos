@@ -12,7 +12,8 @@
       <td>{{ c.$key }}</td>
       <td>{{ c.name }}</td>      
       <td>
-        <a class="btn btn-outline-primary" [routerLink]="['/admin/categories/', c.$key]">Edit</a>
+        <a class="btn btn-outline-primary" [routerLink]="['/admin/categories/', c.$key]">Editar</a>
+        <a class="btn btn-outline-danger" (click)="delete(c.$key)">Borrar</a>
       </td>
     </tr>
   </tbody>
