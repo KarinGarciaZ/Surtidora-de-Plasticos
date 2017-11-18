@@ -29,11 +29,9 @@ export class ProductFormComponent implements OnInit {
     this.id = this.router.snapshot.paramMap.get('id');
     if ( this.id ) {
       this.productService.getProduct( this.id )
-      .subscribe( product => {
-        console.log('product: ', product);
-        this.product = product });
-
+      .subscribe( product => this.product = product );
     }
+    
    }
 
   ngOnInit() {

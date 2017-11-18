@@ -79,7 +79,9 @@ import { CustomFormsModule } from 'ng2-validation';
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate:[GuardService, AdminGuardService]},
       { path: 'admin/products', component: AdminProductsComponent, canActivate:[GuardService, AdminGuardService]},
       { path: 'admin/brands/new', component: BrandsFormComponent, canActivate:[GuardService, AdminGuardService]},
-      { path: 'admin/categories/new', component: CategoriesFormComponent, canActivate:[GuardService, AdminGuardService]}
+      { path: 'admin/categories/new', component: CategoriesFormComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/brands/:id', component: BrandsFormComponent, canActivate:[GuardService, AdminGuardService]},
+      { path: 'admin/categories/:id', component: CategoriesFormComponent, canActivate:[GuardService, AdminGuardService]}
     ])
   ],
   providers: [

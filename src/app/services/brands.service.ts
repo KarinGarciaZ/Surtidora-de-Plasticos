@@ -22,4 +22,16 @@ export class BrandsService {
   getAll() {
     return this.db.list('/brands');
   }
+
+  delete( id ) {
+    this.db.object('/brands/' + id).remove();
+  }
+
+  getBrand ( id ) {
+    return this.db.object('/brands/' + id);    
+  }
+
+  update(id, brand) {
+    this.db.object('/brands/' + id).update(brand);
+  }
 }

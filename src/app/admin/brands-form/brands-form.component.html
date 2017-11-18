@@ -4,7 +4,7 @@
       <form [formGroup]="form" (submit)="save()">
         <div class="form-group">
           <label for="title">Nombre</label>
-          <input formControlName="name" id="title" class="form-control" type="text">
+          <input  formControlName="name" id="title" class="form-control" type="text">
           <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
             <div *ngIf="name.errors.required">Campo obligatorio</div>
             <div *ngIf="name.errors.minlength">Como minimo debe tener 3 caracteres.</div>

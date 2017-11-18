@@ -15,4 +15,10 @@ export class AdminBrandsComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete( id ) {
+    if (confirm('¿Está seguro de querer borrar esa marca?')) {
+      this.brandsService.delete( id );
+      window.location.reload();
+    }    
+  }
 }
