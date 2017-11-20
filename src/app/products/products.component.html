@@ -1,3 +1,39 @@
-<p>
-  products works!
-</p>
+<div class="row" style="margin: 50px;" *ngIf="categories &&  products">
+  <div class="col-md-2 row">
+    <div class="list-group list">
+      <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/products" >Todas las Categorías</a>
+      <a 
+        *ngFor="let c of categories" 
+        class="list-group-item list-group-item-action" 
+        routerLink="/products" 
+        [queryParams]="{ category: c.$key }"
+        [class.active]="category === c.$key"
+        >
+        {{ c.name }}
+      </a>
+    </div>
+    <div class="list-group list">
+      <a 
+        *ngFor="let b of brands" 
+        class="list-group-item list-group-item-action" 
+        routerLink="/products" 
+        [queryParams]="{ brand: b.$key }"
+        [class.active]="brand === b.$key"
+        >
+        {{ b.name }}
+      </a>
+    </div>
+  </div>
+  <div class="col-md-10 row">
+    <div class="col-md-3" *ngFor="let p of filtereted">  
+      <div class="card" style="width: 15rem;">
+        <img class="card-img-top" [src]="p.imageUrl" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="card-title">{{ p.title }}</h4>
+          <p class="card-text">{{ p.price | currency:'MXN':true }}</p>
+          <a href="#" class="btn btn-primary">Add Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,7 @@
+import { BrandsService } from './../services/brands.service';
+import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from './../services/category.service';
+import { ProductService } from './../services/product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +9,52 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
+products = [];
+filtereted = [];
+brands;
+brand;
+categories;
+category = "";
 
-  constructor() { }
+  constructor( private productService: ProductService, 
+    private categoryService: CategoryService,
+    private brandsService: BrandsService,
+    private route: ActivatedRoute
+  ) { 
+    this.productService.getAll()
+      .subscribe( products => {
+        this.products = this.filtereted = products;
 
-  ngOnInit() {
+        this.categoryService.getAll()
+        .subscribe( categories => this.categories = categories );  
+        route.queryParamMap.subscribe( params => {
+          if (params.get('category')) {
+            this.category = params.get('category');   
+            this.filterC( this.category );   
+          }
+        });
+
+        this.brandsService.getAll()
+        .subscribe( brands => this.brands = brands );  
+        route.queryParamMap.subscribe( params => {
+          if (params.get('brand')) {
+            this.brand = params.get('brand');   
+            this.filterB( this.brand );   
+          }          
+        });
+      });
+    
+    
   }
 
+  filterC( key ) {
+    if (key) this.filtereted = this.products.filter( p => p.category == key )
+    else this.filtereted = this.products;
+  }
+
+  filterB( key ) {
+    if (key) this.filtereted = this.products.filter( p => p.brand == key )
+    else this.filtereted = this.products;
+  }
 }
