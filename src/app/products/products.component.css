@@ -1,3 +1,11 @@
 .list {
   font-size: 22px;
 }
+
+.card-footer {
+  padding: 0;
+}
+
+.cont {
+  margin-bottom: 30px;
+}

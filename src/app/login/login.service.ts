@@ -85,6 +85,7 @@ export class LoginService {
   logout() {
     this.afAuth.auth.signOut();
     this.username = 'Entrar';
+    localStorage.removeItem('cartId');
   }
 
   get appUser() : Observable<AppUser> {

@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './services/shopping-cart.service';
 import { BrandsService } from './services/brands.service';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
@@ -94,6 +95,7 @@ import { BrandsComponent } from './brands/brands.component';
     AdminGuardService, 
     CategoryService,
     ProductService,
+    ShoppingCartService,
     BrandsService
   ],
   bootstrap: [AppComponent]

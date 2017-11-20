@@ -1,3 +1,5 @@
+import { ShoppingCartService } from './../services/shopping-cart.service';
+import { Product } from './../models/product';
 import { BrandsService } from './../services/brands.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../services/category.service';
@@ -20,7 +22,8 @@ category;
   constructor( private productService: ProductService, 
     private categoryService: CategoryService,
     private brandsService: BrandsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: ShoppingCartService
   ) { 
     
     this.productService.getAll()
@@ -63,5 +66,17 @@ category;
     this.category = "";
     this.brand = "";
     this.filtereted = this.products;
+  }
+
+  addToCart( product: Product ) {
+    let cartId = localStorage.getItem('cartId');
+    if (!cartId) {
+      this.cartService.create().then( res => {
+        console.log('res: ', res);
+        localStorage.setItem('cartId', res.key);
+      });
+    } else {
+
+    }
   }
 }
