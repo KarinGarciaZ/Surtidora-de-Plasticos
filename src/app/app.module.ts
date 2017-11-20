@@ -33,6 +33,7 @@ import { AdminCategoriesComponent } from './admin/admin-categories/admin-categor
 import { AdminBrandsComponent } from './admin/admin-brands/admin-brands.component';
 import { BrandsFormComponent } from './admin/brands-form/brands-form.component';
 import { CustomFormsModule } from 'ng2-validation';
+import { BrandsComponent } from './brands/brands.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CustomFormsModule } from 'ng2-validation';
     CategoriesFormComponent,
     AdminCategoriesComponent,
     AdminBrandsComponent,
-    BrandsFormComponent
+    BrandsFormComponent,
+    BrandsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { CustomFormsModule } from 'ng2-validation';
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'categories', component: CategoriesComponent },
+      { path: 'brands', component: BrandsComponent },
       { path: 'login', component: LoginComponent },
 
       { path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[GuardService]},

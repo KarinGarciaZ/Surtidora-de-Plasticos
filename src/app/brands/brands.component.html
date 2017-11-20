@@ -3,14 +3,14 @@
 
   </div>
   <div class="col-md-10 row">
-    <div class="col-md-3" *ngFor="let c of categories"><br><br>
+    <div class="col-md-3" *ngFor="let b of brands"><br><br>
       <div class="card center" style="width: 99%; height: 90%;">
         <div style="height: 67%;">
-          <img class="card-img-top" [src]="c.imageUrl">
+          <img class="card-img-top" [src]="b.image">
         </div>        
         <div class="card-body">
-          <h4 class="card-title">{{ c.name }}</h4>
-          <a routerLink="/products" [queryParams]="{ category: c.$key }" class="btn btn-outline-primary">Ver productos de la Categoría</a>
+          <h4 class="card-title">{{ b.name }}</h4>
+          <a routerLink="/products" [queryParams]="{ brand: b.$key }" class="btn btn-outline-primary">Ver productos de la Marca</a>
         </div>
       </div>
     </div>
@@ -19,3 +19,4 @@
       
   </div>
 </div>
+

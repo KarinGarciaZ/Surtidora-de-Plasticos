@@ -24,7 +24,7 @@ img{
 }
 
 #navbarCollapse{
-    padding-left: 70px;
+    padding-left: 5%;
 }
 
 .dropdown-menu{
@@ -43,4 +43,8 @@ img{
 .display{
   top: 40px !important;
   left: 80px !important;
+}
+
+li {
+  margin-right: 2%;
 }

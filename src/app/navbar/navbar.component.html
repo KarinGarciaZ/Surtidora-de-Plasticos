@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark row"> 
-  <div class="col-1">
+  <div class="col-md-1">
     <img src="/assets/logo.png" routerLink="/">
   </div>    
           
-  <div class="collapse navbar-collapse col-3" id="navbarCollapse">
+  <div class="collapse navbar-collapse col-md-3" id="navbarCollapse">
     <ul class="navbar-nav">          
       <li class="nav-item">
         <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/products">Productos</a>
@@ -15,32 +15,38 @@
               
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="">Action</a>
-            <a class="dropdown-item" href="">Another action</a>
-            <a class="dropdown-item" href="">Something else here</a>
+            <a *ngFor="let c of categories" class="dropdown-item" routerLink="/products" [queryParams]="{ category: c.$key }">{{ c.name }}</a>       
+          </div>
+        </div>     
+      </li>
+      <li ngbDropdown class="nav-item dropdown">
+        <div class="btn-group">
+          <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/brands">Marcas</a>
+          <a ngbDropdownToggle class="btn btn-outline-secondary nav-link dropdown-toggle button-navbar"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a *ngFor="let b of brands" class="dropdown-item" routerLink="/products" [queryParams]="{ brand: b.$key }">{{ b.name }}</a>       
           </div>
         </div>     
       </li>
     </ul> 
   </div>
 
-  <div class="col-5">
+  <div class="col-md-5">
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" id="search-bar" type="text" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-secondary my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
     </form>        
   </div> 
 
-  <div class="col-3">
+  <div class="col-md-3">
     <div class="row">
-      <div class="col-3">
+      <div class="col-2">
         <a href=""><i class="fa fa-shopping-cart fa-2x ico" aria-hidden="true"></i></a>        
       </div>  
-      <div class="col-9">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          </li>        
+      <div class="col-10">
+        <ul class="navbar-nav">     
           <li ngbDropdown>
             <div class="btn-group">
               <a class="btn btn-outline-secondary nav-link button-navbar" routerLink="/categories"><i class="fa fa-user-o" aria-hidden="true"></i>  {{ log.username }}</a>
