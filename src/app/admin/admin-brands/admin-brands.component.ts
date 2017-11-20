@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-brands.component.css']
 })
 export class AdminBrandsComponent implements OnInit {
-  brands$;
+  brands = [];
+  filtered = [];
   constructor(private brandsService: BrandsService) {
-    this.brands$ = this.brandsService.getAll();
+    this.brandsService.getAll()
+      .subscribe( brands => this.brands = this.filtered = brands);
    }
 
   ngOnInit() {
@@ -20,5 +22,13 @@ export class AdminBrandsComponent implements OnInit {
       this.brandsService.delete( id );
       window.location.reload();
     }    
+  }
+
+  filter( name:string ) {
+    this.filtered = ( name ) ?
+      this.filtered.filter( p => p.name.toLowerCase().includes( name.toLowerCase())) :
+      this.brands;
+
+      this.brands;
   }
 }
