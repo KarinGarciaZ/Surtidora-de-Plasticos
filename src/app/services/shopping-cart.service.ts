@@ -6,7 +6,7 @@ import 'rxjs/add/operator/take';
 @Injectable()
 export class ShoppingCartService {
 
-  constructor( private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
   private create() {
     return this.db.list('/shopping-carts').push({
@@ -14,7 +14,7 @@ export class ShoppingCartService {
     });
   }
 
-  private async getOrCreateCart() {
+  private async getOrCreateCart(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
      
@@ -23,16 +23,20 @@ export class ShoppingCartService {
     return res.key;          
   }
 
-  private getCart(cartId: string) {
-    this.db.object('/shopping-carts/' + cartId);
+  async getCart() {
+    let cartId = await this.getOrCreateCart();
+    return this.db.object('/shopping-carts/' + cartId);
+  }
+
+  private getItem(cartId: string, productId: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
 
   async addToCart(product: Product) {
     let cartId = await this.getOrCreateCart();
-    let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key);
+    let item$ = this.getItem(cartId, product.$key);
     item$.take(1).subscribe( item => {
-      if ( item.$exists() ) item$.update({ quantity: item.quantity + 1 });
-      else item$.set({ product: product, quantity: 1 });
+      item$.update({ product: product, quantity: (item.quantity || 0) + 1 });
     });
   }
 }

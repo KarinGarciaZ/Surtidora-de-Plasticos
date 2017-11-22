@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { ShoppingCartService } from './../services/shopping-cart.service';
 import { Product } from './../models/product';
 import { BrandsService } from './../services/brands.service';
@@ -5,19 +6,22 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../services/category.service';
 import { ProductService } from './../services/product.service';
 import { Component, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy{
 products = [];
 filtereted = [];
 brands;
 brand;
 categories;
 category;
+cart: any;
+subcription: Subscription;
 
   constructor( private productService: ProductService, 
     private categoryService: CategoryService,
@@ -50,6 +54,15 @@ category;
       });   
   }
 
+  async ngOnInit() {
+    this.subcription = (await this.cartService.getCart())
+      .subscribe(cart => this.cart = cart);
+  }
+
+  ngOnDestroy() {
+    this.subcription.unsubscribe();
+  }
+
   filterC( key ) {
     this.brand = "";
     if (key) this.filtereted = this.products.filter( p => p.category == key )
@@ -70,5 +83,11 @@ category;
 
   addToCart( product: Product ) {
     this.cartService.addToCart(product);
+  }
+
+  getQuantity(product: Product) {
+    if ( !this.cart ) return 0;
+    let item = this.cart.items[product.$key];
+    return item ? item.quantity : 0;
   }
 }
