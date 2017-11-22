@@ -69,14 +69,6 @@ category;
   }
 
   addToCart( product: Product ) {
-    let cartId = localStorage.getItem('cartId');
-    if (!cartId) {
-      this.cartService.create().then( res => {
-        console.log('res: ', res);
-        localStorage.setItem('cartId', res.key);
-      });
-    } else {
-
-    }
+    this.cartService.addToCart(product);
   }
 }
