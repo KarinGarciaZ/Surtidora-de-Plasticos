@@ -85,6 +85,10 @@ subcription: Subscription;
     this.cartService.addToCart(product);
   }
 
+  removeItem( product: Product ) {
+    this.cartService.removeItem(product);
+  }
+
   getQuantity(product: Product) {
     if ( !this.cart ) return 0;
     let item = this.cart.items[product.$key];

@@ -1,9 +1,12 @@
+import { Observable } from 'rxjs/Observable';
+import { ShoppingCart } from './../models/shopping-cart';
 import { BrandsService } from './../services/brands.service';
 import { CategoryService } from './../services/category.service';
 import { AppUser } from './../models/app-user';
 import { LoginService } from './../login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'navbar',
@@ -19,16 +22,25 @@ export class NavbarComponent implements OnInit {
   appUser: AppUser;
   categories;
   brands;
+  totalItems;
+  cart$: Observable<ShoppingCart>;
 
-  constructor( private log: LoginService, private categoryService: CategoryService, private brandsService: BrandsService) {
+  constructor( 
+    private log: LoginService, 
+    private categoryService: CategoryService, 
+    private brandsService: BrandsService,
+    private shoppingCart: ShoppingCartService
+  ) {
     log.appUser.subscribe(appUser => this.appUser = appUser);
     this.categoryService.getAll()
       .subscribe( categories => this.categories = categories );
     this.brandsService.getAll()
-      .subscribe( brands => this.brands = brands );
+      .subscribe( brands => this.brands = brands );    
    }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.cart$ = await this.shoppingCart.getCart();
+
   }
 
   settingCreateAccount(){

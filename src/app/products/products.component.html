@@ -36,9 +36,21 @@
             <p class="card-text">{{ p.price | currency:'MXN':true }}</p>            
           </div>
           <div class="card-footer">
-            <button (click)="addToCart(p)" class="btn btn-primary btn-block">Agregar a Carrito  <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-          </div>
-          {{ getQuantity(p) }}
+            <button *ngIf="getQuantity(p) === 0; else updateQuantity" (click)="addToCart(p)" class="btn btn-secundary btn-block">Agregar a Carrito  <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+            <ng-template #updateQuantity>
+              <div class="row no-gutters">
+                <div class="col-3">
+                  <button class="btn btn-secondary btn-block" (click)="removeItem(p)">-</button>
+                </div>
+                <div class="col text-center">
+                  {{ getQuantity(p) }} in cart
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-secondary btn-block" (click)="addToCart(p)">+</button>
+                </div>
+              </div>              
+            </ng-template>            
+          </div>          
         </div>
       </div>
     </div>    
