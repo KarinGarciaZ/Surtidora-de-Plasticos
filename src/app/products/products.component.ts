@@ -55,7 +55,7 @@ subcription: Subscription;
   }
 
   async ngOnInit() {
-    this.subcription = (await this.cartService.getCart())
+    this.subcription = (await this.cartService.getCompleteCart())
       .subscribe(cart => this.cart = cart);
   }
 

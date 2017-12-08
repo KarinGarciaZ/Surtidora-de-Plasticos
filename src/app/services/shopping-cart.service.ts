@@ -27,6 +27,11 @@ export class ShoppingCartService {
     return res.key;          
   }
 
+  async getCompleteCart(): Promise<Observable<ShoppingCart>> {
+    let cartId = await this.getOrCreateCart();
+    return this.db.object('/shopping-carts/' + cartId);
+  }
+
   async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getOrCreateCart();
     return this.db.object('/shopping-carts/' + cartId)
@@ -38,6 +43,7 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
+    console.log('product: ', product);
    this.updateItems(product, 1);
   }
 
@@ -54,6 +60,10 @@ export class ShoppingCartService {
         this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key).remove();
       }
     });
+  }
 
+  async removeItems() {
+    let cartId = await this.getOrCreateCart();
+    this.db.object('/shopping-carts/' + cartId + '/items/').remove();
   }
 }
