@@ -50,6 +50,10 @@ export class ShoppingCartService {
     let item$ = this.getItem(cartId, product.$key);
     item$.take(1).subscribe( item => {
       item$.update({ product: product, quantity: (item.quantity || 0) + change });
+      if ( (item.quantity + change) == 0 ) {
+        this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key).remove();
+      }
     });
+
   }
 }
